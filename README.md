@@ -1,6 +1,6 @@
 # NeverGonnaGiveYouUp
 
-Academic Statistical Software developer for Statistics Applied classes on Fatec.
+Academic App developed for Applied Statistics classes on Fatec.
 
 
 ## Contributing
