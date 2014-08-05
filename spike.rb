@@ -1,14 +1,16 @@
 
-@values = [111, 90, 121, 105, 122, 61, 128, 112, 128, 93, 108, 138, 88, 110, 112, 112, 97, 128, 102, 125, 87, 119, 104, 116, 96, 114, 107, 113, 80, 113, 123, 95, 115, 70, 115, 101, 114, 127, 92, 103, 78, 118, 100, 115, 116, 98, 119, 72, 125, 109, 79, 139, 75, 109, 123, 124, 108, 125, 116, 83, 94, 106, 117, 82, 122, 99, 124, 84, 91, 130]
+#@values = [111, 90, 121, 105, 122, 61, 128, 112, 128, 93, 108, 138, 88, 110, 112, 112, 97, 128, 102, 125, 87, 119, 104, 116, 96, 114, 107, 113, 80, 113, 123, 95, 115, 70, 115, 101, 114, 127, 92, 103, 78, 118, 100, 115, 116, 98, 119, 72, 125, 109, 79, 139, 75, 109, 123, 124, 108, 125, 116, 83, 94, 106, 117, 82, 122, 99, 124, 84, 91, 130]
+
+@values = [28, 6, 17, 48, 63, 47, 27, 21, 3, 7, 12, 39, 50, 54, 33, 45, 15, 24, 1, 7, 36, 53, 46, 27, 5, 10, 32, 50, 52, 11, 42, 22, 3, 17, 34, 56, 25, 2, 30, 10, 33, 1, 49, 13, 16, 8, 31, 21, 6, 9, 2, 11, 32, 25, 0, 55, 23, 41, 29, 4, 51, 1, 6, 31, 5, 5, 11, 4, 10, 26, 12, 6, 16, 8, 2, 4, 28]
 
 # ROL
+puts "ROL"
 p @values.sort!
 
 # Amplitude
 @amplitude = @values.last - @values.first
 
-# Número de classes
-
+# Number of classes
 @number_elements = @values.size
 @k = Math.sqrt(@number_elements).to_i
 
@@ -25,11 +27,11 @@ def n_classes(amp, k)
   end
 end
 
-# Intervalo de Classe
+# Interval
 @ac, @k = n_classes(@amplitude, @k)
 @interval = @ac/@k
 
-# Tabela
+# Table
 @group = Hash.new
 
 @group[0] = {:F => 0.0, :fr => 0.0, :fx => 0.0} # To calculate Total
@@ -60,7 +62,7 @@ end
   end
 end
 
-puts "index -  range   -  FI   -  FR   -   F   -  FX"
+puts "\nindex -  range   -  FI   -  FR   -   F   -  FX"
 @group.sort_by{|k,v| k}.each do |k, v|
   if v[:range]
     puts "#{k.to_s.rjust(5, " ")} - #{v[:range].to_s.rjust(8, " ")} - #{v[:fi].to_s.rjust(5, " ")} - #{v[:fr].round(2).to_s.rjust(5, " ")} - #{v[:F].to_s.rjust(5, " ")} - #{v[:fx].round(2).to_s.rjust(5, " ")}"
