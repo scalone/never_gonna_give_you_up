@@ -1,5 +1,5 @@
 class Statistic
-  attr_reader :data, :values, :amplitude, :rol, :size, :k, :interval
+  attr_reader :data, :values, :amplitude, :rol, :size, :k, :interval, :result
 
   DISTRIBUTION_TYPE_CONTINOUS = :continous
   DISTRIBUTION_TYPE_DISCRETE  = :discrete
@@ -21,17 +21,17 @@ class Statistic
     @interval  = calculate_interval(@amplitude, @k)
   end
 
-  def to_table(type)
+  def to_table!(type)
     if type == DISTRIBUTION_TYPE_DISCRETE
-      group = to_discrete
+      @result = to_discrete
     elsif type == DISTRIBUTION_TYPE_CONTINOUS
-      group = to_continous
+      @result = to_continous
     else
       raise "Invalid type"
     end
 
-    group.delete(0)
-    group
+    @result.delete(0)
+    @result
   end
 
   def to_continous
