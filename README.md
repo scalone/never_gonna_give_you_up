@@ -7,10 +7,16 @@ Academic App developed for Applied Statistics classes on Fatec.
 1. Install Ruby
 2. Bundle `$ bundle install`
 
+## Execution
+
+Execute informing type(discrete or continous) and passing values with coma.
+
+`$ rake statistic:calculate TYPE=discrete VALUES=111,90,10...`
+
 ## Test
 
-Execute:  `$ ruby test/test_statistic.rb`
- 
+1. Execute:  `$ rake test` 
+
 
 ## Contributing
 
