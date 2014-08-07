@@ -52,13 +52,15 @@ class TestStatistic < Test::Unit::TestCase
     assert_equal 10, @statistic.interval
   end
 
-  # TODO fragment this
+  # TODO fragment or abstract this
   def test_to_table_continous
-    assert_equal Fixture::CONTINOUS_TABLE, @statistic.to_table(:continous)
+    assert_equal Fixture::CONTINOUS_TABLE, @statistic.to_table!(:continous)
+    assert_equal Fixture::CONTINOUS_TABLE, @statistic.result
   end
 
-  # TODO fragment this
+  # TODO fragment or abstract this
   def test_to_table_discrete
-    assert_equal Fixture::DISCRETE_TABLE, @statistic.to_table(:discrete)
+    assert_equal Fixture::DISCRETE_TABLE, @statistic.to_table!(:discrete)
+    assert_equal Fixture::DISCRETE_TABLE, @statistic.result
   end
 end
