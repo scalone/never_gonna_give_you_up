@@ -1,7 +1,4 @@
-
-require "./statistic.rb"
-require "./test/fixture.rb"
-require "test/unit"
+require File.dirname(File.realpath(__FILE__)) + "/test_helper.rb"
 
 class TestStatistic < Test::Unit::TestCase
   def setup
