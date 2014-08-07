@@ -2,6 +2,15 @@
 
 Academic App developed for Applied Statistics classes on Fatec.
 
+## Setup
+
+1. Install Ruby
+2. Bundle `$ bundle install`
+
+## Test
+
+Execute:  `$ ruby test/test_statistic.rb`
+ 
 
 ## Contributing
 
