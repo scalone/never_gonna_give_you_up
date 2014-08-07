@@ -71,7 +71,31 @@ class Statistic
     group
   end
 
+  def print(type)
+    if type == DISTRIBUTION_TYPE_DISCRETE
+      print_discrete
+    elsif type == DISTRIBUTION_TYPE_CONTINOUS
+      print_continous
+    else
+      raise "Invalid type"
+    end
+  end
+
   private
+  def print_continous
+    puts "\nindex -  range   -  FI   -  FR   -   F   -  FX"
+    @result.sort_by{|k,v| k}.each do |k, v|
+      puts "#{k.to_s.rjust(5, " ")} - #{v[:range].to_s.rjust(8, " ")} - #{v[:fi].to_s.rjust(5, " ")} - #{v[:fr].round(2).to_s.rjust(5, " ")} - #{v[:F].to_s.rjust(5, " ")} - #{v[:fx].round(2).to_s.rjust(5, " ")}"
+    end
+  end
+
+  def print_discrete
+    puts "\n   xi - FI  -  FR  -    F  -   FX"
+    @result.sort_by{|k,v| k}.each do |k, v|
+      puts "#{k.to_s.rjust(5, " ")} - #{v[:fi].to_s.rjust(2, " ")} - #{v[:fr].round(2).to_s.rjust(5, " ")} - #{v[:F].to_s.rjust(5, " ")} - #{v[:fx].round(2).to_s.rjust(5, " ")}"
+    end
+  end
+
   def populate_line(group, index, number_of_elements)
     group[index][:fi] = group[index][:values].size
     group[index][:fr] = (100.0 * group[index][:fi] / number_of_elements)
