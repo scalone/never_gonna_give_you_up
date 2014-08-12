@@ -139,7 +139,7 @@ class Statistic
       elsif (amp % (k + 1)) == 0
         return [amp, k + 1]
       elsif (amp % (k - 1)) == 0
-        return [amp, k + 1]
+        return [amp, k - 1]
       end
     end
   end
