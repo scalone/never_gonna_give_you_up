@@ -72,6 +72,7 @@ class Statistic
   end
 
   def print(type)
+    p self.rol
     if type == DISTRIBUTION_TYPE_DISCRETE
       print_discrete
     elsif type == DISTRIBUTION_TYPE_CONTINOUS
