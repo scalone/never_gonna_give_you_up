@@ -85,8 +85,12 @@ class Statistic
   def print_continous
     puts "\nindex -  range   -  FI   -  FR   -   F   -  FX"
     @result.sort_by{|k,v| k}.each do |k, v|
-      puts "#{k.to_s.rjust(5, " ")} - #{v[:range].to_s.rjust(8, " ")} - #{v[:fi].to_s.rjust(5, " ")} - #{v[:fr].round(2).to_s.rjust(5, " ")} - #{v[:F].to_s.rjust(5, " ")} - #{v[:fx].round(2).to_s.rjust(5, " ")}"
+      puts "#{k.to_s.rjust(5, " ")} - #{fix_range(v[:range]).to_s.rjust(8, " ")} - #{v[:fi].to_s.rjust(5, " ")} - #{v[:fr].round(2).to_s.rjust(5, " ")} - #{v[:F].to_s.rjust(5, " ")} - #{v[:fx].round(2).to_s.rjust(5, " ")}"
     end
+  end
+
+  def fix_range(range)
+    range.min..(range.max + 1)
   end
 
   def print_discrete
@@ -108,7 +112,7 @@ class Statistic
     begin
       if @data.include? ","
         return convert(@data.split(","))
-      elsif @data.include? " " 
+      elsif @data.include? " "
         return convert(@data.split(" "))
       end
     end
