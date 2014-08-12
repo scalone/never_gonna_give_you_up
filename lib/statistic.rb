@@ -64,8 +64,9 @@ class Statistic
     group = {0 => TABLE_SCHEME}
     rol.group_by {|v| v}.each do |k,v|
       index += 1
-      group[index] = Hash.new
+      group[index] ||= Hash.new
       group[index][:values] = v
+      group[index][:value]  = v.first
       populate_line(group, index, size)
     end
     group
@@ -97,7 +98,7 @@ class Statistic
   def print_discrete
     puts "\n   xi - FI  -  FR  -    F  -   FX"
     @result.sort_by{|k,v| k}.each do |k, v|
-      puts "#{k.to_s.rjust(5, " ")} - #{v[:fi].to_s.rjust(2, " ")} - #{v[:fr].round(2).to_s.rjust(5, " ")} - #{v[:F].to_s.rjust(5, " ")} - #{v[:fx].round(2).to_s.rjust(5, " ")}"
+      puts "#{v[:value].to_s.rjust(5, " ")} - #{v[:fi].to_s.rjust(2, " ")} - #{v[:fr].round(2).to_s.rjust(5, " ")} - #{v[:F].to_s.rjust(5, " ")} - #{v[:fx].round(2).to_s.rjust(5, " ")}"
     end
   end
 
