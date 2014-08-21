@@ -79,6 +79,19 @@ class Statistic
       rol[(size + 1 / 2) - 1]
     end
   end
+
+  def mode
+    group = Hash.new
+    max   = 0
+
+    rol.group_by{|v| v}.each do |k,v|
+      group[v.size] ||= []
+      group[v.size] << v.first
+      max = v.size if max < v.size
+    end
+
+    group[max]
+  end
   def print(type)
     p self.rol
     if type == DISTRIBUTION_TYPE_DISCRETE
