@@ -92,6 +92,11 @@ class Statistic
 
     group[max]
   end
+
+  def average
+    total/size
+  end
+
   def print(type)
     p self.rol
     if type == DISTRIBUTION_TYPE_DISCRETE
