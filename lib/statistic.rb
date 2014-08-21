@@ -72,6 +72,13 @@ class Statistic
     group
   end
 
+  def median
+    if (size % 2) == 0
+      ((rol[(size / 2) - 1] + rol[size / 2])).to_f / 2
+    else
+      rol[(size + 1 / 2) - 1]
+    end
+  end
   def print(type)
     p self.rol
     if type == DISTRIBUTION_TYPE_DISCRETE
