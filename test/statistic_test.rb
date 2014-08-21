@@ -19,6 +19,10 @@ class TestStatistic < Test::Unit::TestCase
     end
   end
 
+  def test_parse_float_data
+    assert_equal [10,10,3.4,2,1], Statistic.new("10,10,3.4,2,1").values
+  end
+
   def test_parse_data_coma
     assert_equal @values, @statistic.values
   end
