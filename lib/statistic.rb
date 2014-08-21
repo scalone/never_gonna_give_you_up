@@ -1,5 +1,5 @@
 class Statistic
-  attr_reader :data, :values, :amplitude, :rol, :size, :k, :interval, :result
+  attr_reader :data, :values, :amplitude, :rol, :size, :k, :interval, :result, :total
 
   DISTRIBUTION_TYPE_CONTINOUS = :continous
   DISTRIBUTION_TYPE_DISCRETE  = :discrete
@@ -123,7 +123,8 @@ class Statistic
   end
 
   def convert(list)
-    list.collect{|v| v.strip.to_i}
+    @total = 0.0
+    list.collect{|v| @total += v.strip.to_c; v.strip.to_c}
   end
 
   def calculate_interval(amp, k)
