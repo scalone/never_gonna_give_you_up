@@ -9,7 +9,7 @@ class Statistic
     :F      => 0.0,
     :fr     => 0.0,
     :fx     => 0.0,
-    :xiXfi  => 0.0,
+    #:xiXfi  => 0.0,
     :values => []
   }
 
@@ -121,8 +121,7 @@ class Statistic
       display =  "#{k.to_s.rjust(5, " ")} - "
       display << "#{fix_range(v[:range]).to_s.rjust(12, " ")} - "
       display << "#{v[:fi].to_s.rjust(5, " ")} - "
-      display << "#{v[:xi].to_s.rjust(5, " ")} - "
-      display << "#{v[:xiXfi].to_s.rjust(6, " ")} - "
+      #display << "#{v[:xiXfi].to_s.rjust(6, " ")} - "
       display << "#{v[:fr].round(2).to_s.rjust(5, " ")} - "
       display << "#{v[:F].to_s.rjust(5, " ")} - "
       display << "#{v[:fx].round(2).to_s.rjust(5, " ")}"
@@ -147,19 +146,19 @@ class Statistic
 
   def populate_line(type, group, index, number_of_elements)
     if type == DISTRIBUTION_TYPE_DISCRETE
-      group[index][:xi]    = group[index][:value]
+      #group[index][:xi]    = group[index][:value]
     else #DISTRIBUTION_TYPE_CONTINOUS
-      group[index][:xi]    = (group[index][:range].min + group[index][:range].max) / 2
+      #group[index][:xi]    = (group[index][:range].min + group[index][:range].max) / 2
     end
 
     group[index][:fi]    = group[index][:values].size
     group[index][:fr]    = (100.0 * group[index][:fi] / number_of_elements)
     group[index][:F]     = (group[index-1][:F]  + group[index][:fi])
     group[index][:fx]    = (group[index-1][:fx] + group[index][:fr])
-    group[index][:xiXfi] = (group[index][:xi] * group[index][:fi])
+    #group[index][:xiXfi] = (group[index][:xi] * group[index][:fi])
 
-    @xiXfi_total ||= 0
-    @xiXfi_total += group[index][:xiXfi]
+    #@xiXfi_total ||= 0
+    #@xiXfi_total += group[index][:xiXfi]
   end
 
   # TODO Remove exception
