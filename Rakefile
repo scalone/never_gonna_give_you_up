@@ -12,7 +12,7 @@ namespace :statistic do
   desc "Statistic Calculate"
   task :calculate do
     statistic = Statistic.new(ENV["VALUES"])
-    statistic.to_table!(ENV["TYPE"].to_sym)
+    statistic.to_table!(ENV["TYPE"].to_sym) unless ENV["TYPE"].to_sym == :median
     statistic.print(ENV["TYPE"].to_sym)
   end
 end
@@ -82,6 +82,61 @@ namespace :list11 do
     statistic = Statistic.new("32  40  22  11  34  40  16  26  23  31  27  10  38  17  13 45  25  10  18  23  35  22  30  14  18  20  13  24  35  29 33  48  20  12  31  39  17  58  19  16  12  21  15  12  20 51  12  19  15  41  29  25  13  23  32  14  27  43  37  21 28  37  26  44  11  53  38  46  17  36  28  49  56  19  11")
     statistic.to_table!(:continous)
     statistic.print(:continous)
+  end
+end
+
+namespace :list3 do
+  desc "Exercise 1"
+  task :e1 do
+    statistic = Statistic.new("3 4 3.5 5 3.5 4 5 5.5 4 5")
+    statistic.print(:median)
+  end
+
+  desc "Exercise 2"
+  task :e2 do
+    # TODO many type or other abstraction
+    # TODO interpretação
+    #rake statistic:calculate TYPE=median VALUES="18, 17, 19, 17, 18, 18, 20, 18, 18, 18, 19, 18, 21, 18, 20, 18, 20, 18, 18, 19, 18, 19, 19, 19, 18, 19, 19, 21, 19, 19, 19, 21, 17, 19, 19, 18, 19, 19, 18, 20, 20, 18, 20, 18, 20, 20, 19, 19, 21, 18"
+    statistic = Statistic.new("18, 17, 19, 17, 18, 18, 20, 18, 18, 18, 19, 18, 21, 18, 20, 18, 20, 18, 18, 19, 18, 19, 19, 19, 18, 19, 19, 21, 19, 19, 19, 21, 17, 19, 19, 18, 19, 19, 18, 20, 20, 18, 20, 18, 20, 20, 19, 19, 21, 18")
+    puts "A: Rol \n\n#{statistic.rol}\n\n"
+    puts "B: tabela discreta"
+    statistic.to_table!(:discrete)
+    statistic.print(:discrete)
+    puts "\nC: Moda, Média e Mediana e suas interpretações\n\n"
+    statistic.print(:median)
+  end
+
+  desc "Exercise 3"
+  task :e3 do
+
+=begin
+    1   0 |---- 50   10
+    2  50 |---- 100  28
+    3 100 |---- 150  12
+    4 150 |---- 200   2
+    5 200 |---- 250   1
+    6 250 |---- 300   1
+=end
+    #rake statistic:calculate TYPE=median VALUES="6  9 2 7 0 8 2 5 4 2 5  4 4 4 4 2 5 6 3 7 3  8 8 4 4 4 7 7 6 5 4  7 5 3 3 1 3 8 0 6 5  1 2 3 3 0 5 6 6 3"
+    statistic = Statistic.new("3, 4, 3.5, 5, 3.5, 4, 5, 5.5, 4, 5")
+    statistic.to_table!(:discrete)
+    statistic.print(:discrete)
+  end
+
+  desc "Exercise 9"
+  task :e9 do
+    #rake statistic:calculate TYPE=discrete VALUES="6  9 2 7 0 8 2 5 4 2 5  4 4 4 4 2 5 6 3 7 3  8 8 4 4 4 7 7 6 5 4  7 5 3 3 1 3 8 0 6 5  1 2 3 3 0 5 6 6 3"
+    statistic = Statistic.new("3, 4, 3.5, 5, 3.5, 4, 5, 5.5, 4, 5")
+    statistic.to_table!(:discrete)
+    statistic.print(:discrete)
+  end
+
+  desc "Exercise 10"
+  task :e10 do
+    #rake statistic:calculate TYPE=discrete VALUES="6  9 2 7 0 8 2 5 4 2 5  4 4 4 4 2 5 6 3 7 3  8 8 4 4 4 7 7 6 5 4  7 5 3 3 1 3 8 0 6 5  1 2 3 3 0 5 6 6 3"
+    statistic = Statistic.new("3, 4, 3.5, 5, 3.5, 4, 5, 5.5, 4, 5")
+    statistic.to_table!(:discrete)
+    statistic.print(:discrete)
   end
 end
 
