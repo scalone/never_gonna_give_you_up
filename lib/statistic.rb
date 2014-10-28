@@ -6,32 +6,32 @@ require './lib/item_discrete.rb'
 
 class Statistic
   attr_accessor :table
-  attr_reader :data, :values, :amplitude, :rol, :size, :k, :interval, :result, :total, :xiXfi_total
+  attr_reader :data, :values, :amplitude, :rol, :k, :interval, :result, :type
 
-  DISTRIBUTION_TYPE_CONTINOUS = :continous
+  DISTRIBUTION_TYPE_CONTINOUS = :continuous
   DISTRIBUTION_TYPE_DISCRETE  = :discrete
-  TYPE_MEDIAN                 = :median
 
   def self.create_from_table(type, objects)
-    statistic = Statistic.new
+    # Only for continuous now
+    statistic = Statistic.new(type)
     statistic.table = Table.create_from_itens(type, objects)
     statistic
   end
 
-  def initialize(data=nil)
+  def initialize(type = DISTRIBUTION_TYPE_DISCRETE, data=nil)
+    @type = type
     unless data.nil?
       @data      = data
-      @values, @total = Statistic::Parse.perform(data)
+      @values    = Statistic::Parse.perform(data)
       @rol       = @values.sort
       @amplitude = calculate_amplitude
-      @size      = @values.size.to_f
       @k         = calculate_k
       @interval  = calculate_interval(@amplitude, @k)
     end
   end
 
-  def to_table!(type)
-    create_table type
+  def to_table!
+    create_table self.type
   end
 
   def create_table(type)
@@ -43,11 +43,11 @@ class Statistic
   end
 
   def calculate_k
-    Math.sqrt(@values.size).to_i.to_f # abs
+    Math.sqrt(size).to_i.to_f # abs
   end
 
-  def median(type = DISTRIBUTION_TYPE_DISCRETE)
-    if type == DISTRIBUTION_TYPE_DISCRETE
+  def median
+    if self.type == DISTRIBUTION_TYPE_DISCRETE
       if (size % 2) == 0
         ((rol[(size / 2) - 1] + rol[size / 2])).to_f / 2
       else
@@ -58,16 +58,19 @@ class Statistic
   end
 
   def mode
-    group = Hash.new
-    max   = 0
+    if self.type == DISTRIBUTION_TYPE_DISCRETE
+      group = Hash.new
+      max   = 0
 
-    rol.group_by{|v| v}.each do |k,v|
-      group[v.size] ||= []
-      group[v.size] << v.first
-      max = v.size if max < v.size
+      rol.group_by{|v| v}.each do |k,v|
+        group[v.size] ||= []
+        group[v.size] << v.first
+        max = v.size if max < v.size
+      end
+
+      group[max]
+    else
     end
-
-    group[max]
   end
 
   def average
@@ -77,6 +80,9 @@ class Statistic
   def xifi
     self.table.xifi
   end
+
+  def size
+    self.table.size
   end
 
   def print(type)
@@ -155,8 +161,7 @@ class Statistic
     end
 
     def self.convert(list)
-      total = 0.0
-      [list.collect{|v| total += v.strip.to_f; v.strip.to_f}, total]
+      list.collect{|v| v.strip.to_f}
     end
   end
 
