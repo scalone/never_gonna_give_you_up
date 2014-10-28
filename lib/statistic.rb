@@ -74,6 +74,7 @@ class Statistic
 
       group[max]
     else
+      3 * median - 2 * average
     end
   end
 
