@@ -53,7 +53,11 @@ class Statistic
       else
         rol[(size + 1 / 2) - 1]
       end
-    else # continous
+    else
+      lower_limit_near = self.table.itens.last.f / 2
+      item = self.table.itens.find{|item| item.f; ((item.before.f)..(item.f)).include? lower_limit_near }
+      lower_limit = item.range.min
+      lower_limit + (lower_limit_near - item.before.f) / item.fi * (item.range.max - lower_limit)
     end
   end
 
