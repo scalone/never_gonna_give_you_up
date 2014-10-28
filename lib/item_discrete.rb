@@ -4,4 +4,8 @@ class ItemDiscrete < Item
       table.itens << ItemDiscrete.new(table, numbers)
     end
   end
+
+  def calculate_xifi
+    self.value * self.fi
+  end
 end

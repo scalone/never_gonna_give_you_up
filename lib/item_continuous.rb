@@ -15,4 +15,9 @@ class ItemContinuous < Item
       table.itens << ItemContinuous.new(table, values, range)
     end
   end
+
+  def calculate_xifi
+    average_min_max = (self.range.min + self.range.max) / 2
+    average_min_max * self.fi
+  end
 end

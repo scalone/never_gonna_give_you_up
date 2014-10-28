@@ -2,7 +2,7 @@ class Table
   TABLE_TYPE_CONTINOUS = :continous
   TABLE_TYPE_DISCRETE  = :discrete
 
-  attr_accessor :itens, :rol, :index, :size, :type, :interval
+  attr_accessor :itens, :rol, :index, :size, :type, :interval, :xifi
 
   def self.create_from_itens(type, objects)
     table = Table.new(type)
@@ -19,6 +19,7 @@ class Table
     @itens    = itens
     @size     = rol.size.to_f
     @interval = interval
+    @xifi     = 0
     populate!(rol) unless rol.empty?
   end
 

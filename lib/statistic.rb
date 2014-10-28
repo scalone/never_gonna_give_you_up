@@ -71,7 +71,12 @@ class Statistic
   end
 
   def average
-    total/size
+    xifi / size
+  end
+
+  def xifi
+    self.table.xifi
+  end
   end
 
   def print(type)
@@ -87,23 +92,30 @@ class Statistic
   end
 
   private
-  def print_continous
-    puts "\nindex -    range     -  FI   -  FR   -   F   -  FX"
+  def print_continuous
+    puts "\nindex -    range     -  FI   -  FR   -   F   -  FX   -  xifi"
     @table.itens.each_with_index do |item, index|
       display =  "#{(index+1).to_s.rjust(5, " ")} - "
       display << "#{item.range.to_s.rjust(12, " ")} - "
       display << "#{item.fi.to_s.rjust(5, " ")} - "
       display << "#{item.fr.round(2).to_s.rjust(5, " ")} - "
       display << "#{item.f.to_s.rjust(5, " ")} - "
-      display << "#{item.fx.round(2).to_s.rjust(5, " ")}"
+      display << "#{item.fx.round(2).to_s.rjust(5, " ")} - "
+      display << "#{item.xifi.round(2).to_s.rjust(6, " ")}"
       puts display
     end
   end
 
   def print_discrete
-    puts "\n   xi -  FI   -  FR  -    F  -   FX"
+    puts "\n   xi -  FI   -  FR  -    F  -   FX   -  xifi"
     @table.itens.sort_by(&:value).each do |v|
-      puts "#{v.value.to_s.rjust(5, " ")} - #{v.fi.to_s.rjust(5, " ")} - #{v.fr.round(2).to_s.rjust(5, " ")} - #{v.f.to_s.rjust(5, " ")} - #{v.fx.round(2).to_s.rjust(5, " ")}"
+      display =  "#{v.value.to_s.rjust(5, " ")} "
+      display << "#{v.fi.to_s.rjust(5, " ")} - "
+      display << "#{v.fr.round(2).to_s.rjust(5, " ")} - "
+      display << "#{v.f.to_s.rjust(5, " ")} - "
+      display << "#{v.fx.round(2).to_s.rjust(5, " ")} - "
+      display << "#{v.fx.round(2).to_s.rjust(6, " ")}"
+      puts display
     end
   end
 
