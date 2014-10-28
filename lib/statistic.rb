@@ -90,15 +90,19 @@ class Statistic
     self.table.size
   end
 
-  def print(type)
-    if type == DISTRIBUTION_TYPE_DISCRETE
-      print_discrete
-    elsif type == DISTRIBUTION_TYPE_CONTINOUS
-      print_continous
-    elsif type == TYPE_MEDIAN
-      print_median
+  def print(is_median = false)
+    if is_median
+      if self.type == DISTRIBUTION_TYPE_DISCRETE
+        print_median_discrete
+      else
+        print_median_continuous
+      end
     else
-      raise "Invalid type"
+      if self.type == DISTRIBUTION_TYPE_DISCRETE
+        print_discrete
+      else
+        print_continuous
+      end
     end
   end
 
@@ -130,7 +134,11 @@ class Statistic
     end
   end
 
-  def print_median
+  def print_median_discrete
+    puts "Median: #{self.median}; Mode: #{self.mode}; Average: #{self.average}"
+  end
+
+  def print_median_continuous
     puts "Median: #{self.median}; Mode: #{self.mode}; Average: #{self.average}"
   end
 
